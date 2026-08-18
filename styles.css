@@ -1,0 +1,333 @@
+/* ============================================================
+   styles.css  |  Carta Yesi — Full-page, no card, flexbox/grid
+   Paleta: marrón + vino/borgoña
+============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brown-deep:   #3E1F0D;
+  --brown-mid:    #6B3A2A;
+  --brown-warm:   #8B5C3E;
+  --brown-light:  #C49A6C;
+  --brown-cream:  #F5E6D3;
+  --wine-deep:    #4A0E1C;
+  --wine-mid:     #7B1B35;
+  --wine-rose:    #A0365A;
+  --wine-blush:   #D4748C;
+  --wine-light:   #F2C4CE;
+  --sh-brown:     rgba(62,31,13,0.22);
+  --sh-wine:      rgba(74,14,28,0.18);
+}
+
+/* ── BASE ── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  width: 100vw;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 10% 10%,  rgba(212,116,140,0.30) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 90%,  rgba(139,92,62,0.22)   0%, transparent 45%),
+    radial-gradient(ellipse at 80% 10%,  rgba(123,27,53,0.18)   0%, transparent 40%),
+    linear-gradient(145deg, #F9E8D8 0%, #F5D4DC 40%, #F0DDD5 100%);
+  overflow-x: hidden;
+  /* Borde decorativo en toda la página */
+  border: clamp(5px, 1vw, 10px) solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+/* Borde animado gradient en la página */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  border: clamp(5px, 1vw, 10px) solid;
+  border-image: linear-gradient(135deg, var(--wine-mid), var(--brown-warm), var(--wine-rose), var(--brown-light), var(--wine-mid)) 1;
+}
+
+/* ── PARTICLES ── */
+.particles-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle     { position: absolute; animation: floatParticle linear infinite; opacity: 0.5; }
+@keyframes floatParticle {
+  0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.6; }
+  92%  { opacity: 0.6; }
+  100% { transform: translateY(-30px) rotate(360deg); opacity: 0; }
+}
+
+/* ══════════════════════════════════
+   PAGE LAYOUT — flex column full-page
+══════════════════════════════════ */
+.page-wrapper {
+  position: relative; z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* ── TICKER ── */
+.ticker-wrap {
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--wine-deep), var(--wine-mid), var(--wine-deep));
+  padding: clamp(8px, 1.5vh, 14px) 0;
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 4px 16px var(--sh-wine);
+}
+.ticker-inner { display:flex; gap:24px; animation:ticker 22s linear infinite; white-space:nowrap; width:max-content; }
+.ticker-item  { font-size:clamp(.72rem,1.6vw,.95rem); font-weight:700; color:var(--wine-light); display:flex; align-items:center; gap:8px; flex-shrink:0; padding:0 18px; letter-spacing:.5px; }
+@keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ── GREETING TAG ── */
+.greeting-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(14px, 2.5vh, 28px) 0 0;
+  gap: 12px;
+}
+.greeting-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--wine-mid), var(--brown-warm));
+  color: var(--wine-light);
+  font-size: clamp(.65rem, 1.4vw, .9rem);
+  font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+  padding: clamp(5px,1vh,9px) clamp(16px,3vw,28px);
+  border-radius: 50px;
+  box-shadow: 0 4px 14px var(--sh-wine);
+}
+
+/* ══════════════════════════════════
+   MAIN GRID — 3 columnas
+   [Panda1]  [Centro]  [Tulipanes]
+══════════════════════════════════ */
+.main-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 2.4fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(10px, 2vw, 24px);
+  padding: clamp(12px, 2.5vw, 28px) clamp(16px, 3vw, 48px);
+  align-items: center;
+}
+
+/* ── COL 1: Panda 1 (Joyful) ── */
+.col-panda-left {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panda-left {
+  width: clamp(100px, 18vw, 260px);
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px var(--sh-brown));
+  animation: floatLeft 4.5s ease-in-out infinite;
+}
+@keyframes floatLeft {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-16px) rotate(2deg); }
+}
+
+/* ── COL 2: Centro — título + mensaje + reproductor ── */
+.col-center {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2.5vh, 30px);
+}
+
+/* Título */
+.card-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  color: var(--wine-mid);
+  text-align: center; line-height: 1.0;
+  text-shadow:
+    4px 4px 0 rgba(74,14,28,0.18),
+    0 2px 20px rgba(160,54,90,0.2);
+  animation: titlePulse 3.5s ease-in-out infinite;
+}
+.card-title .name-highlight {
+  color: var(--brown-warm); display: block;
+  font-size: clamp(3.4rem, 9vw, 7rem);
+  text-shadow:
+    4px 5px 0 var(--wine-blush),
+    8px 8px 0 rgba(74,14,28,0.12);
+}
+@keyframes titlePulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.025);} }
+
+/* Divisor */
+.kawaii-divider { display:flex; align-items:center; gap:10px; width:100%; }
+.divider-line   { flex:1; height:2.5px; background:linear-gradient(90deg,transparent,var(--wine-blush),transparent); border-radius:4px; }
+.divider-icon   { font-size:clamp(1rem,2.2vw,1.5rem); animation:spin 6s linear infinite; }
+@keyframes spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+/* Mensaje */
+.message-card {
+  background: rgba(255,255,255,0.70);
+  border: 2px solid rgba(160,54,90,0.18);
+  border-radius: clamp(16px,2.5vw,28px);
+  padding: clamp(18px,3.5vh,38px) clamp(22px,4vw,44px);
+  backdrop-filter: blur(14px);
+  position: relative;
+  box-shadow:
+    0 8px 28px rgba(160,54,90,0.13),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  width: 100%;
+}
+.message-card::before {
+  content: '\275D'; position: absolute; top: -12px; left: 18px;
+  font-size: clamp(2.4rem,5vw,4rem); color: var(--wine-blush);
+  line-height: 1; opacity: .65;
+}
+.message-text {
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  color: var(--brown-deep);
+  line-height: 2.0;
+  text-align: center; font-weight: 700;
+}
+.message-text .emphasis { color: var(--wine-mid); font-weight: 900; }
+
+/* ── REPRODUCTOR ── */
+.music-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.5vh, 16px);
+  width: 100%;
+}
+
+.music-label {
+  font-size: clamp(.78rem, 1.8vw, 1rem);
+  color: var(--brown-mid); font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* PNG 3 — Kawaii Chubby (botón play/pause) */
+.panda-player-wrapper {
+  position: relative; display: inline-flex;
+  flex-direction: column; align-items: center;
+  cursor: pointer; user-select: none;
+}
+.panda-player {
+  width: clamp(100px, 18vw, 220px);
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px var(--sh-brown));
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1);
+}
+.panda-player:hover { transform: scale(1.08); }
+.panda-player-wrapper.playing .panda-player { animation: pandaDance .7s ease-in-out infinite alternate; }
+@keyframes pandaDance { from{transform:rotate(-6deg) scale(1);} to{transform:rotate(6deg) scale(1.06);} }
+
+.play-pause-badge {
+  position: absolute; bottom: -6px;
+  background: linear-gradient(135deg, var(--wine-mid), var(--wine-rose));
+  border: 4px solid white; border-radius: 50%;
+  width: clamp(44px, 8vw, 64px); height: clamp(44px, 8vw, 64px);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px var(--sh-wine);
+  font-size: clamp(1rem, 2vw, 1.4rem); color: white;
+  transition: transform .22s, background .22s;
+}
+.panda-player-wrapper:hover .play-pause-badge {
+  transform: scale(1.18);
+  background: linear-gradient(135deg, var(--brown-warm), var(--brown-mid));
+}
+
+/* Ondas de sonido */
+.sound-wave {
+  display: flex; align-items: flex-end;
+  gap: clamp(4px,.8vw,6px);
+  height: clamp(22px,4vh,36px);
+  justify-content: center;
+}
+.wave-bar {
+  width: clamp(4px,.8vw,7px);
+  background: linear-gradient(to top, var(--wine-mid), var(--wine-blush));
+  border-radius: 6px; animation: waveAnim 1.2s ease-in-out infinite; height: 5px;
+}
+.wave-bar:nth-child(1){animation-delay:0s;}
+.wave-bar:nth-child(2){animation-delay:.1s;}
+.wave-bar:nth-child(3){animation-delay:.2s;}
+.wave-bar:nth-child(4){animation-delay:.3s;}
+.wave-bar:nth-child(5){animation-delay:.4s;}
+.wave-bar:nth-child(6){animation-delay:.2s;}
+.wave-bar:nth-child(7){animation-delay:.1s;}
+@keyframes waveAnim { 0%,100%{height:5px;} 50%{height:clamp(14px,3vh,30px);} }
+.sound-wave.paused .wave-bar { animation:none; height:5px; }
+
+.music-info   { text-align:center; line-height:1.6; }
+.music-title  { font-size:clamp(.92rem,2vw,1.15rem); font-weight:900; color:var(--wine-mid); }
+.music-artist { font-size:clamp(.78rem,1.6vw,.95rem); color:var(--brown-warm); font-weight:600; }
+.music-hint   { font-size:clamp(.65rem,1.3vw,.78rem); color:var(--wine-blush); font-weight:600; font-style:italic; }
+
+/* ── COL 3: Tulipanes ── */
+.col-tulip-right {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tulip-main {
+  width: clamp(110px, 20vw, 280px);
+  object-fit: contain;
+  filter: drop-shadow(0 12px 26px rgba(160,54,90,0.32));
+  animation: tulipSway 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+@keyframes tulipSway {
+  0%,100% { transform: rotate(-8deg) scale(1); }
+  50%      { transform: rotate(8deg) scale(1.04) translateY(-10px); }
+}
+
+/* ── FOOTER SECTION ── */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px,1.8vh,18px);
+  padding: clamp(12px,2vh,22px) clamp(16px,3vw,48px) clamp(18px,3vh,32px);
+}
+
+.ribbon-banner {
+  background: linear-gradient(135deg, var(--wine-deep), var(--wine-mid));
+  color: var(--wine-light); text-align: center; font-weight: 800;
+  font-size: clamp(.8rem, 1.8vw, 1.05rem); letter-spacing: 1.5px;
+  padding: clamp(9px,1.8vh,16px) clamp(24px,5vw,48px);
+  border-radius: clamp(12px,2vw,20px);
+  box-shadow: 0 6px 20px var(--sh-wine);
+  width: fit-content;
+}
+
+.signature-section { text-align:center; }
+.signature-hearts  { font-size:clamp(1rem,2.2vw,1.4rem); animation:heartBeat 1.5s ease-in-out infinite; display:block; margin-bottom:4px; }
+@keyframes heartBeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.24);} 75%{transform:scale(1.16);} }
+.signature-text    { font-family:'Pacifico',cursive; font-size:clamp(.8rem,1.8vw,1.05rem); color:var(--brown-warm); opacity:.85; }
+
+/* ── CORNER STARS FLOATING ── */
+.corner-bow { position: fixed; font-size: clamp(1.2rem, 2.5vw, 2.2rem); animation: wiggle 3s ease-in-out infinite; pointer-events:none; z-index:5; }
+.corner-bow.tl { top: clamp(12px,2vw,24px); left:  clamp(12px,2vw,24px); }
+.corner-bow.tr { top: clamp(12px,2vw,24px); right: clamp(12px,2vw,24px); animation-delay:.5s; }
+.corner-bow.bl { bottom: clamp(14px,2vw,26px); left: clamp(12px,2vw,24px); animation-delay:1s; }
+.corner-bow.br { bottom: clamp(14px,2vw,26px); right:clamp(12px,2vw,24px); animation-delay:1.5s; }
+@keyframes wiggle { 0%,100%{transform:rotate(-6deg) scale(1);} 50%{transform:rotate(6deg) scale(1.12);} }
+
+/* ── RESPONSIVE: pantallas pequeñas colapsar a 1 col ── */
+@media (max-width: 640px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .col-panda-left  { grid-column:1; grid-row:auto; }
+  .col-center      { grid-column:1; grid-row:auto; }
+  .col-tulip-right { grid-column:1; grid-row:auto; }
+}

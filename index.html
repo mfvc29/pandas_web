@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Yesi 🐼💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- Partículas flotantes -->
+  <div class="particles-bg" id="particles"></div>
+
+  <!-- Lazos decorativos fijos en las esquinas -->
+  <div class="corner-bow tl">🎀</div>
+  <div class="corner-bow tr">🌸</div>
+  <div class="corner-bow bl">✨</div>
+  <div class="corner-bow br">🎀</div>
+
+  <!-- Audio — inicia desde el segundo 9 -->
+  <audio id="bgMusic" preload="auto">
+    <source src="Ed Sheeran - Perfect (Karaoke).mp3" type="audio/mpeg"/>
+  </audio>
+
+  <div class="page-wrapper">
+
+
+
+    <!-- ══ TAG DE BIENVENIDA ══ -->
+    <div class="greeting-area">
+      <div class="greeting-tag">✨ con todo el cariño ✨</div>
+    </div>
+
+    <!-- ══ GRID PRINCIPAL: 3 columnas ══ -->
+    <div class="main-grid">
+
+      <!-- COL 1 — PNG 1: Joyful Round Panda -->
+      <div class="col-panda-left">
+        <img src="Joyful Round Panda.png"
+             alt="Panda feliz saltando"
+             class="panda-left"/>
+      </div>
+
+      <!-- COL 2 — Centro: título, mensaje, reproductor -->
+      <div class="col-center">
+
+        <!-- Título -->
+        <h1 class="card-title">
+          Hola,
+          <span class="name-highlight">Yesi!</span>
+        </h1>
+
+        <!-- Divisor -->
+        <div class="kawaii-divider">
+          <div class="divider-line"></div>
+          <span class="divider-icon">🌸</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="message-card">
+          <p class="message-text">
+            Que cada día sea tan <span class="emphasis">bonito y dulce</span>
+            como tú lo mereces.<br/>
+            ¡Sigue siendo esa chica tan
+            <span class="emphasis">maravillosa</span>! 🌸✨
+          </p>
+        </div>
+
+        <!-- Divisor música -->
+        <div class="kawaii-divider">
+          <div class="divider-line"></div>
+          <span style="font-size:clamp(1rem,2.2vw,1.5rem)">🎵</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- PNG 3 — Kawaii Chubby Panda: botón play/pause -->
+        <div class="music-section">
+          <div class="music-label">🎶 Toca el pandita para escuchar 🎶</div>
+
+          <div class="panda-player-wrapper" id="playerWrapper"
+               onclick="toggleMusic()" title="Play / Pause">
+            <img src="Kawaii Chubby Panda.png"
+                 alt="Panda kawaii — Play/Pause"
+                 class="panda-player"/>
+            <div class="play-pause-badge" id="playPauseBadge">&#9654;</div>
+          </div>
+
+          <div class="sound-wave paused" id="soundWave">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+
+
+
+          <div class="music-hint" id="musicHint" style="display:none;">
+            ↑ Toca al pandita para escuchar la música ↑
+          </div>
+        </div>
+
+      </div><!-- /.col-center -->
+
+
+
+    </div><!-- /.main-grid -->
+
+    <!-- ══ FOOTER ══ -->
+    <div class="footer-section">
+      <div class="ribbon-banner">
+        🤎 &nbsp; Que tengas un GRAN día, Yesi &nbsp; 🤎
+      </div>
+      <div class="signature-section">
+        <span class="signature-hearts">💕🤎💕</span>
+        <div class="signature-text">con mucho cariño ~ siempre 🌸</div>
+      </div>
+    </div>
+
+  </div><!-- /.page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>
