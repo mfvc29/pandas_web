@@ -23,7 +23,9 @@ setInterval(createParticle, 2200);
 
 /* ── TICKER LOOP ── */
 const ticker = document.getElementById('ticker');
-ticker.innerHTML += ticker.innerHTML;
+if (ticker) {
+  ticker.innerHTML += ticker.innerHTML;
+}
 
 /* ── MUSIC PLAYER ── */
 const audio         = document.getElementById('bgMusic');
@@ -69,11 +71,13 @@ audio.addEventListener('ended', () => { isPlaying = false; updateUI(); });
 /* ── 3D CARD TILT ── */
 const card = document.getElementById('mainCard');
 
-card.addEventListener('mousemove', e => {
-  const r = card.getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width  - 0.5;
-  const y = (e.clientY - r.top)  / r.height - 0.5;
-  card.style.transform = `rotateY(${x * 7}deg) rotateX(${-y * 5}deg) scale(1.01)`;
-});
+if (card) {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `rotateY(${x * 7}deg) rotateX(${-y * 5}deg) scale(1.01)`;
+  });
 
-card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+}
